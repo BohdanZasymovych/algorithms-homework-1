@@ -14,7 +14,8 @@
 #include <utility>
 
 class StudentBase1 final : public StudentBaseAbstract {
-private:
+// private:
+public:
     using name_surname_pair = std::pair<std::string, std::string>;
     using name_surname_group_triplet = std::pair<name_surname_pair, std::string>;
 
@@ -42,7 +43,7 @@ private:
     std::unordered_map<name_surname_group_triplet, size_t, nameSurnameGroupTripletHash> studentGroupCountMap; // ((name, surname), group) : count
     std::unordered_map<std::string, Student*> emailStudentMap; // email : student_ptr
 
-public:
+// public:
     std::vector<Student*> getStudentsByName(const std::string& m_name, const std::string& m_surname) override;
     std::unordered_set<std::string> getGroupsSameStudentName() override;
     void changeGroupByEmail(const std::string& m_email, const std::string& newGroup) override;

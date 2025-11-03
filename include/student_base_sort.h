@@ -12,7 +12,8 @@
 #include <locale>
 
 class StudentBaseSort final {
-private:
+// private:
+public:
     static size_t letterToIndex(char32_t c) {
         if (c == 0) return 0;
 
@@ -45,7 +46,7 @@ private:
 
     static void sort(std::vector<Student>& students, size_t left, size_t right, size_t d);
 
-public:
+// public:
     static void sortBuildIn(std::vector<Student>& students);
     static void sortRadix(std::vector<Student>& students);
 };
