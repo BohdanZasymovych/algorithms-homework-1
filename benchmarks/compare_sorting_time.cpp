@@ -9,14 +9,13 @@
 #include "../include/student.h"
 #include "../include/student_base_sort.h"
 
-// ----------------- Read CSV into Students -----------------
 std::vector<Student> readStudentsFromCSV(const std::string& csvPath) {
     std::vector<Student> students;
     std::ifstream file(csvPath);
     if (!file.is_open()) throw std::runtime_error("Cannot open file: " + csvPath);
 
     std::string line;
-    std::getline(file, line); // skip header
+    std::getline(file, line);
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
@@ -50,7 +49,6 @@ std::vector<Student> readStudentsFromCSV(const std::string& csvPath) {
     return students;
 }
 
-// ----------------- Get CSV files from folder -----------------
 std::vector<std::string> getCSVFiles(const std::string& folderPath) {
     std::vector<std::string> files;
     for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
@@ -71,7 +69,6 @@ void benchmarkSorting(const std::vector<std::string>& csvFiles, const std::strin
     for (const auto& csvFile : csvFiles) {
         std::vector<Student> students = readStudentsFromCSV(csvFile);
 
-        // Extract size from filename
         std::string filename = std::filesystem::path(csvFile).filename().string();
         size_t underscorePos = filename.find('_');
         size_t dotPos = filename.find('.');
@@ -100,7 +97,6 @@ void benchmarkSorting(const std::vector<std::string>& csvFiles, const std::strin
     csvRadix.close();
 }
 
-// ----------------- Main -----------------
 int main() {
     const std::string CSV_FOLDER = "/home/bohdan/code/algorithms/homework-1/students-csv-files";
     const std::string OUTPUT_FOLDER = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results/sorting";

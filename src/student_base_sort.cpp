@@ -5,7 +5,8 @@
 #include "../include/student_base_sort.h"
 #include <algorithm>
 #include <locale>
-#include <compare>
+#include <sstream>
+#include <fstream>
 
 
 void StudentBaseSort::sortBuildIn(std::vector<Student>& students) {
@@ -57,5 +58,25 @@ void StudentBaseSort::sort(std::vector<Student>& students, size_t left, size_t r
 
 void StudentBaseSort::sortRadix(std::vector<Student> &students) {
     sort(students, 0, students.size(), 0);
+}
+
+
+void StudentBaseSort::saveToCSV(const std::vector<Student>& studentsToSave, const std::string& pathToSave) {
+    std::ofstream outputFile;
+    outputFile.exceptions(std::ios::badbit);
+    outputFile.open(pathToSave);
+
+    outputFile << "m_name,m_surname,m_email,m_birth_year,m_birth_month,m_birth_day,m_group,m_rating,m_phone_number\n";
+    for (const auto& student : studentsToSave) {
+        outputFile << student.m_name << ',';
+        outputFile << student.m_surname << ',';
+        outputFile << student.m_email << ',';
+        outputFile << student.m_birth_year << ',';
+        outputFile << student.m_birth_month << ',';
+        outputFile << student.m_birth_day << ',';
+        outputFile << student.m_group << ',';
+        outputFile << student.m_rating << ',';
+        outputFile << student.m_phone_number << '\n';
+    }
 }
 

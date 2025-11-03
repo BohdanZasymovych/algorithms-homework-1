@@ -1,10 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <filesystem>
-#include <unordered_set>
 #include <list>
 #include <algorithm>
 #include <map>
@@ -13,6 +11,7 @@
 #include "../include/student_base_1.h"
 #include "../include/student_base_2.h"
 #include "../include/student_base_3.h"
+
 
 // ----------------- Estimate memory of a single Student -----------------
 size_t getStudentMemory(const Student& s) {
@@ -86,7 +85,6 @@ size_t estimateMemory(const StudentBase3& db) {
     return mem;
 }
 
-// ----------------- Utility to get CSV files -----------------
 std::vector<std::string> getCSVFiles(const std::string& folderPath) {
     std::vector<std::string> files;
     for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
@@ -96,7 +94,6 @@ std::vector<std::string> getCSVFiles(const std::string& folderPath) {
     return files;
 }
 
-// ----------------- Template memory benchmark -----------------
 template<typename T>
 void testMemory(const std::vector<std::string>& csvFiles, const std::string& outputFolder) {
     std::ofstream resultCSV(outputFolder + "/" + typeid(T).name() + "_memory.csv");
@@ -110,7 +107,6 @@ void testMemory(const std::vector<std::string>& csvFiles, const std::string& out
         else if constexpr (std::is_same_v<T, StudentBase2>) memUsed = estimateMemory(db);
         else if constexpr (std::is_same_v<T, StudentBase3>) memUsed = estimateMemory(db);
 
-        // Extract size from filename: "sample_10000.csv" -> "10000"
         std::string filename = std::filesystem::path(csvFile).filename().string();
         size_t underscorePos = filename.find('_');
         size_t dotPos = filename.find('.');

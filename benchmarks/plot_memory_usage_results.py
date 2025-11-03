@@ -32,8 +32,7 @@ def plot_memory_csv_results(folder_path, output_path):
         # Sort by Size
         df = df.sort_values(by='Size')
 
-        # Extract full class name from file name: e.g. "12StudentBase1_results.csv" -> "StudentBase1"
-        base_name = os.path.splitext(csv_file)[0]  # Remove .csv
+        base_name = os.path.splitext(csv_file)[0]
         class_name = re.sub(r'^\d+', '', base_name).split('_results')[0]
 
         plt.plot(df['Size'], df['MemoryBytes'], marker='o', label=class_name)
@@ -49,8 +48,7 @@ def plot_memory_csv_results(folder_path, output_path):
     print(f"Plot saved to {output_path}")
 
 
-# Example usage
 if __name__ == "__main__":
     folder = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results/memory"
-    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_memory.png"
+    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_memory_usage.png"
     plot_memory_csv_results(folder, output)

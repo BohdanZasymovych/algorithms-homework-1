@@ -30,8 +30,8 @@ def plot_csv_results(folder_path, output_path):
 
         df = df.sort_values(by='Size')
 
-        base_name = os.path.splitext(csv_file)[0]  # Remove .csv
-        class_name = base_name.split('_results')[0]  # Remove suffix
+        base_name = os.path.splitext(csv_file)[0]
+        class_name = base_name.split('_results')[0]
         class_name = ''.join(c for c in class_name if not c.isdigit() or c.isalpha() == False)
         import re
         class_name = re.sub(r'^\d+', '', base_name).split('_results')[0]
@@ -50,5 +50,5 @@ def plot_csv_results(folder_path, output_path):
 
 if __name__ == "__main__":
     folder = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results"
-    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_operations.png"
+    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_operations_count.png"
     plot_csv_results(folder, output)

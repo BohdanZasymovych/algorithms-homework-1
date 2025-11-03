@@ -49,8 +49,7 @@ def plot_sorting_comparison(folder_path, output_path):
     print(f"Plot saved to {output_path}")
 
 
-# Example usage
 if __name__ == "__main__":
     folder = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results/sorting"
-    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_sorting.png"
+    output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_sorting_time.png"
     plot_sorting_comparison(folder, output)

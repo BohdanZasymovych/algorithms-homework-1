@@ -6,11 +6,8 @@
 #include <random>
 #include <chrono>
 #include <filesystem>
-#include <unordered_set>
-#include <memory>
 #include <algorithm>
 #include "../include/student.h"
-#include "../include/student_base_abstract.h"
 #include "../include/student_base_1.h"
 #include "../include/student_base_2.h"
 #include "../include/student_base_3.h"
@@ -25,7 +22,7 @@ std::vector<Student> readStudentsFromCSV(const std::string& csvPath) {
     }
 
     std::string line;
-    std::getline(file, line); // skip header
+    std::getline(file, line);
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
@@ -67,7 +64,6 @@ std::vector<Student*> getStudentPointers(std::vector<Student>& students) {
     return ptrs;
 }
 
-// ----------------- Utility to get CSV files from folder -----------------
 std::vector<std::string> getCSVFiles(const std::string& folderPath) {
     std::vector<std::string> files;
     for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
@@ -89,19 +85,16 @@ void testPerformance(const std::vector<std::string>& csvFiles, const std::string
     resultCSV << "Size,OperationsPer10Sec\n";
 
     for (const auto& csvFile : csvFiles) {
-        // Load derived class instance
         T db = T::fromCSV(csvFile);
 
-        // Read students from CSV for random selection
         std::vector<Student> allStudentsVec = readStudentsFromCSV(csvFile);
         std::vector<Student*> allStudents = getStudentPointers(allStudentsVec);
 
         size_t operationsCount = 0;
         auto startTime = std::chrono::steady_clock::now();
 
-        // Random distributions
         std::uniform_int_distribution<size_t> dist(0, allStudents.size() - 1);
-        std::vector<int> opsWeights = {1, 5, 1}; // 1:5:1 proportion
+        std::vector<int> opsWeights = {1, 5, 1};
         std::discrete_distribution<int> opDist(opsWeights.begin(), opsWeights.end());
 
         while (true) {
@@ -136,8 +129,7 @@ void testPerformance(const std::vector<std::string>& csvFiles, const std::string
     resultCSV.close();
 }
 
-// ----------------- Main -----------------
-int main(int argc, char* argv[]) {
+int main() {
     const std::string CSV_FOLDER = "/home/bohdan/code/algorithms/homework-1/students-csv-files";
     const std::string OUTPUT_FOLDER = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results/operations";
 

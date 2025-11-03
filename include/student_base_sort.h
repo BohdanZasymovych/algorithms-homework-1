@@ -12,7 +12,6 @@
 #include <locale>
 
 class StudentBaseSort final {
-// private:
 public:
     static size_t letterToIndex(char32_t c) {
         if (c == 0) return 0;
@@ -45,10 +44,11 @@ public:
     }
 
     static void sort(std::vector<Student>& students, size_t left, size_t right, size_t d);
-
-// public:
     static void sortBuildIn(std::vector<Student>& students);
+
     static void sortRadix(std::vector<Student>& students);
+
+    static void saveToCSV(const std::vector<Student>& studentsToSave, const std::string& pathToSave);
 };
 
 #endif //HOMEWORK_1_STUDENT_BASE_SORT_H

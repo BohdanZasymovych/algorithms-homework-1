@@ -12,15 +12,12 @@
 #include <unordered_set>
 
 class StudentBase3 final : public StudentBaseAbstract {
-// private:
 public:
     std::vector<Student> students;
 
-// public:
     std::vector<Student*> getStudentsByName(const std::string& m_name, const std::string& m_surname) override;
     std::unordered_set<std::string> getGroupsSameStudentName() override;
     void changeGroupByEmail(const std::string& m_email, const std::string& newGroup) override;
-    void saveToCSV(const std::vector<Student>& studentsToSave, const std::string& pathToSave) override;
     static StudentBase3 fromCSV(const std::string& pathToCSV);
 };
 
