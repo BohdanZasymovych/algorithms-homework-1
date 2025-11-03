@@ -49,6 +49,6 @@ def plot_csv_results(folder_path, output_path):
     print(f"Plot saved to {output_path}")
 
 if __name__ == "__main__":
-    folder = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results"
+    folder = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-results/operations"
     output = "/home/bohdan/code/algorithms/homework-1/benchmarks/benchmark-plots/plot_operations_count.png"
     plot_csv_results(folder, output)
